@@ -11,21 +11,24 @@
 
 @interface DCNSDateConverter()
 @property(nonatomic, strong) NSString *pattern;
+@property(nonatomic, strong) NSLocale *locale;
 - (BOOL) validDouble: (NSString *) doubleValue;
 @end
 
 @implementation DCNSDateConverter
 @synthesize pattern = _pattern;
+@synthesize locale = _locale;
 
 
-+ (DCNSDateConverter *) dateConverterForPattern: (NSString *) pattern{
-    return [[self alloc] initWithDatePattern: pattern];
++ (DCNSDateConverter *) dateConverterForPattern: (NSString *) pattern andLocale:(NSLocale *)locale {
+    return [[self alloc] initWithDatePattern: pattern andLocale:locale];
 }
 
-- (id) initWithDatePattern: (NSString *) pattern {
+- (id) initWithDatePattern: (NSString *) pattern andLocale:(NSLocale *)locale {
     self = [super init];
     if (self) {
         _pattern = pattern;
+        _locale = locale;
     }
     return self;
 }
@@ -37,6 +40,7 @@
     }else{
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = self.pattern;
+        formatter.locale = self.locale;
         return [formatter dateFromString:value];
     }
 }

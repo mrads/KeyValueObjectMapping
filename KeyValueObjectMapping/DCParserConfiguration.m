@@ -19,6 +19,7 @@
 
 @implementation DCParserConfiguration
 @synthesize datePattern = _datePattern;
+@synthesize dateLocale = _dateLocale;
 @synthesize splitToken = _splitToken;
 @synthesize arrayMappers = _arrayMappers;
 @synthesize objectMappers = _objectMappers;
@@ -41,6 +42,7 @@
         _splitToken = @"_";
         _nestedPrepertiesSplitToken = @".";
         _datePattern = @"eee MMM dd HH:mm:ss ZZZZ yyyy";
+        _dateLocale = [NSLocale currentLocale];
     }
     return self;
 }
